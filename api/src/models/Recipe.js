@@ -4,18 +4,18 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Recipe', {
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    resume: {
+    summary: {
       type: DataTypes.TEXT,
       allowNull: false
     },
     healt_score: {
       type: DataTypes.INTEGER
     },
-    stepTOstep: {
+    stepBYstep: {
       type: DataTypes.STRING
     },
 

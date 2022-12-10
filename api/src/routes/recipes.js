@@ -1,6 +1,7 @@
 const fetch = (...args) =>
 	import('node-fetch').then(({default: fetch}) => fetch(...args));
 require('dotenv').config();
+const e = require('express');
 const { Router } = require('express');
 const Recipe = require('../models/Recipe');
 const router = Router();
@@ -9,12 +10,12 @@ const {
   } = process.env;
 
 router.post('/', async (req, res) => {
-    const {name, resume} = req.body;
+    const {title, summary} = req.body;
 
     try{
-      if(!name || !resume) return res.status(404).send('Falta enviar datos obligatorios');
-      const recipe = await Recipe.create(req.body);
-      res.status(200).json(recipe);
+      if(!title || !summary) return res.status(404).send('Falta enviar datos obligatorios');
+      const reci = await Recipe.create(req.body);
+      res.status(200).send(reci);
     } catch(err){
       res.status(404).json({error: err});
     }
@@ -22,25 +23,23 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     const {name} = req.query;
+    let recipes = [];
     try {
         const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${MY_APIKEY}`);
-        const json = await response.json();
-        res.status(200).send(json.results.slice(0,3));
+        const data = await response.json();
+        if (!name) {
+            recipes = recipes.concat(data.results.slice(0,100))
+            res.status(200).json(recipes);
+        } else {
+            recipes = recipes.concat(data.results.slice(0,100)).filter(e => e.title.toLowerCase().includes(name.toLowerCase()))
+            res.status(200).send(recipes);
+        }
+        
     } catch (err) {
         res.status(400).json({
             Tipo: 'Ha ocurrido un error',
             err: err});
     }
-    
-/*     try{
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${MY_APIKEY}`)
-        .then(response => res.status(200).json(response.json()))
-    }catch(e){
-            res.status(400).json({error: e});
-        } */
-      /* res.status(200).json({
-          a: `Obtener un listado de las recetas que contengan la palabra ingresada como query parameter`,
-          b: 'Si no existe ninguna receta mostrar un mensaje adecuado'}) */
   })
   
 
