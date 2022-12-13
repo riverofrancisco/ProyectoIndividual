@@ -9,5 +9,8 @@ module.exports = (sequelize) => {
       allowNull: true,
       unique: true
     },
+  },
+  {
+    timestamps: false,  
   });
 };
