@@ -10,13 +10,24 @@ const {
 
 ///POST ////
 router.post('/', async (req, res) => {
-    const {title, summary, diet} = req.body;
+    const {title, summary, healthScore, stepBYstep, image, diet} = req.body;
 
     try {
       if (!title || !summary) return res.status(404).send('Falta enviar datos obligatorios');
-      const NewRecipe = await Recipe.create(req.body);
-      if(diet) await Diet.create({name: diet});
-      res.status(200).send(NewRecipe);
+      const newRecipe = await Recipe.create({title, summary, healthScore, stepBYstep, image,});
+      if (diet) {//creo una diet 
+        const newDiet = await Diet.create({name: diet});
+        await newRecipe.addDiet(newDiet);
+/*        diet.forEach(async (d) => {return await Diet.findOrCreate({ where: {name: d}})});
+       diet.forEach(async (d) => {return await newRecipe.addDiet(d)}); */
+      };
+      const recipeCreated = await Recipe.findOne({
+        where: { title: title },
+        include: {
+            model: Diet,
+        }
+      })
+      res.status(200).json(recipeCreated);
     } catch(e) {
       res.status(400).json({
         Tipo: 'Ha ocurrido un error',

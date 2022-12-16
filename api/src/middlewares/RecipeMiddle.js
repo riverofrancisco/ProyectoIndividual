@@ -50,7 +50,11 @@ if(THErecipe.length > 0){
                     };
         return APIoneRecipe;
      } else {
-        const DBoneRecipe = await Recipe.findByPk(idReceta);
+        const DBoneRecipe = await Recipe.findOne({
+            where: { id: idReceta },
+            include: {
+                model: Diet,
+            }})
         return DBoneRecipe;
     }
 } else {
