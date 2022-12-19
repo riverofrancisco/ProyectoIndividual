@@ -54,7 +54,11 @@ if(THErecipe.length > 0){
             where: { id: idReceta },
             include: {
                 model: Diet,
-            }})
+                attributes: ['name']
+            },
+        })
+/*         const datadiets = DBoneRecipe.diets.forEach(element => {return element.name});
+        DBoneRecipe.diets = datadiets; */
         return DBoneRecipe;
     }
 } else {
