@@ -12,6 +12,7 @@ export default function Cards({recipes}){
               summary={r.summary}
               image={r.image}
             /> )}
+            
         </div>
       );
 }
