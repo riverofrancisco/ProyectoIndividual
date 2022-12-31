@@ -14,7 +14,8 @@ async function APIrecipes(){
         title: r.title,
         summary: r.summary,
         healthScore: r.healthScore,
-        image: r.image
+        image: r.image,
+        diets: r.diets
     }});
     return shortAPIRecipes
 };

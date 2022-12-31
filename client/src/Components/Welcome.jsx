@@ -5,10 +5,10 @@ export default function Welcomepage(){
     return (
         <div>
         <Link to='/recipes'>
-          Welcome to our PI Foods
+          Go to HomePage
         </Link>
         <h1>Henry Food</h1>
-        <h2>Probando el funcionamiento</h2>
+        <h2>It's working</h2>
         </div>
     );
 }

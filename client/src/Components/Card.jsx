@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css';
 
-export default function Card({id, title, summary, image}){
+export default function Card({id, title, summary, healthScore, image, diets}){
 
     return (
         <div className='card'>
@@ -9,11 +9,10 @@ export default function Card({id, title, summary, image}){
             <img src= {image} alt="PhotoHere" />
             </div>
             <div className='card-title'>
-            <h5>{title}</h5>
+            <h4>{title}</h4>
             <div className='card-body'>
-                <p>id: {id}</p>
-                <p>Summary</p>
-                <p>{summary}</p>
+                <h5>HealthScore: {healthScore}</h5>
+                <p>Diets: {diets}</p>
             </div>
             </div>       
        </div>
