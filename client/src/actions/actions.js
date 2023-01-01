@@ -4,17 +4,16 @@ export const getRecipes = () => {
         fetch('http://localhost:3001/recipes').then(response => response.json())
         .then(data => {return dispatch({type: 'GET_RECIPES', payload: data})})
         .catch((e) => console.log('Error:', e));
-
-        /* return dispatch({type: 'GET_RECIPES', payload: json}); */
     }
    } 
 
-  /*  return (dispatch) => {fetch('http://localhost:3001/recipes').then((r) => {return r.json();}).then((response) => {return dispatch({type: 'GET_RECIPES', payload: response});}).catch((error) => console.log('Error:', error));   }; */
-
-
-
-
-
+export const getRecipeDetail = (id) => {
+  return (dispatch) => {
+    fetch(`http://localhost:3001/recipes/${id}`).then(response => response.json())
+    .then(data => {return dispatch({type: 'GET_RECIPE_DETAIL', payload: data})})
+    .catch((e) => console.log('Error:', e));
+  }
+}
 
 export const getDiets = () => { 
     return async (dispatch) => {
@@ -22,14 +21,4 @@ export const getDiets = () => {
 
         return dispatch({type: 'GET_DIETS', payload: json});
     }
-   }  
-
-/* export const findRecipe = (title) => {
-    fetch(`http://localhost:3001/recipes?name=${title}`)
-      .then(response => response.json())
-      .then(data => {
-        if(typeof data !== 'string'){
-          return data
-        }
-      })
-  } */
+}  

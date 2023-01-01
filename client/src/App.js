@@ -1,17 +1,16 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
-import {BrowserRouter, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route } from 'react-router-dom';
 
-import Card from './Components/Card.jsx';
 import Cards from './Components/Cards.jsx';
 import Welcomepage from './Components/Welcome';
 import Navbar from './Components/NavBar';
 import Diets from './Components/Diets';
+import RecipeDetail from './Components/RecipeDetail'
+
 
 function App() {
 
-
-  
   return (
     <div className="App">
         <Route 
@@ -21,7 +20,7 @@ function App() {
 
           <Route 
           path = '/home' 
-          component = {Navbar} 
+          component = {Navbar}
           />
 
           <Route 
@@ -34,6 +33,10 @@ function App() {
           component={Diets}
           />
 
+          <Route 
+          path = '/home/:id'
+          component={RecipeDetail}
+          />
 
       <hr />
     </div>

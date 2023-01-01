@@ -10,19 +10,19 @@ const theReducer = (state = initialState, action) => {
     switch(action.type) {
 
         case 'GET_RECIPES':
-            return{
+            return {
                 ...state,
                 recipes: action.payload};
 
         case 'GET_DIETS':
-            return{
+            return {
                 ...state,
                 diets: action.payload};
 
-        case 'GET_RECIPE':
-            return{
+        case 'GET_RECIPE_DETAIL':
+            return {
                 ...state,
-                recipes: action.payload};  
+                recipe: action.payload};  
 
         default:
             return {...state};

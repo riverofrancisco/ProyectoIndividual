@@ -11,7 +11,7 @@ async function getDiets(){
   if(diets.length){ 
       return diets;
   } else {
-      const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY}&number=100&addRecipeInformation=true`);
+      const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY_2}&number=100&addRecipeInformation=true`);
       const data = await response.json();
       const apidiets = data.results.map(r => r.diets);
       apidiets.forEach(element => {

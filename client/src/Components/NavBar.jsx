@@ -1,30 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import './NavBar.css'
 
 export default function Navbar({findRecipe}){
     return (
-        <nav>
-            <Link to ='/recipes'>
-                <span>
-                Recipes
-                </span>
+       <nav>
+            <Link to ='/home'>
+             Home Page
             </Link>
             
-                <span>
-                Order by
-                <ul>
-                    <Link to ='/recipes/ordered1'>
-                    <li>A-Z</li>
-                    </Link>
-                    <Link to ='/recipes/ordered2'>
-                    <li>Z-A</li>
-                    </Link>
-                </ul>
-                </span> 
+            <Link to ='/home'>
+             A-Z Order
+            </Link>
+
+            <Link to ='/home'>
+             Filter by diet-type
+            </Link>
+
+            <Link to ='/home/creation-form'>
+             Add your own recipe
+            </Link>
+
+            <Link to ='/home/our-diets'>
+             Our Diets
+            </Link>
+
             <SearchBar 
-                findRecipe={findRecipe}
-            />
+            findRecipe={findRecipe}/>
         </nav>
     );
 };
