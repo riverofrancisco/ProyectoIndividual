@@ -17,7 +17,7 @@ export const getRecipeDetail = (id) => {
 
 export const getDiets = () => { 
   return (dispatch) => {
-    fetch(`http://localhost:3001/diets`).then(response => response.json())
+    fetch('http://localhost:3001/diets').then(response => response.json())
     .then(data => {return dispatch({type: 'GET_DIETS', payload: data})})
     .catch((e) => console.log('Error:', e));
   }

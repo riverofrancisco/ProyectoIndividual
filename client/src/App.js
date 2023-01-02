@@ -29,12 +29,12 @@ function App() {
           />
 
           <Route 
-          path = '/home/mydiets' 
+          path = '/home/diets' 
           component={Diets}
           />
 
           <Route 
-          path = '/home/:id'
+          path = '/home/recipedetail/:id'
           component={RecipeDetail}
           />
 

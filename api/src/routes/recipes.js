@@ -53,7 +53,7 @@ router.get('/', async (req, res) => {
             if (filteRecipes.length > 0) {
                 res.status(200).json(filteRecipes);
             } else {
-                res.status(404).send(`No se encontraron recetas que contengan "${name}"`);
+                res.status(404).json([{Error: `No se encontraron recetas que contengan "${name}"`}]);
             }}         
     } catch(e) {
         res.status(400).json({
@@ -67,7 +67,7 @@ router.get('/oldway', async (req, res) => {
     const {name} = req.query;
     let recipes = [];
     try {
-        const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY_2}&number=100&addRecipeInformation=true`);
+        const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY}&number=100&addRecipeInformation=true`);
         const data = await response.json();
         let shortAPIRecipes = data.results.map(r => {return {
             id: r.id,

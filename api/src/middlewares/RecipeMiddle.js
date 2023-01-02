@@ -7,7 +7,7 @@ const {
 let recipes = [];
 
 async function APIrecipes(){
-    const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY_3}&number=100&addRecipeInformation=true`);
+    const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY}&number=100&addRecipeInformation=true`);
     const data = await response.json();
     const shortAPIRecipes = data.results.map(r => {return {
         id: 'api' + r.id,
@@ -38,14 +38,14 @@ const THErecipe = recipes.filter(r => r.id.toString() === idReceta)
 if(THErecipe.length > 0){
      if(idReceta[0] === 'a'){ 
         let ID = idReceta.slice(3);
-        const response = await fetch(`${API_PATH}/${ID}/information?apiKey=${MY_APIKEY_3}`);
+        const response = await fetch(`${API_PATH}/${ID}/information?apiKey=${MY_APIKEY}`);
         const data = await response.json();
         const APIoneRecipe = {
                         id: 'api' + data.id,
                         title: data.title,
                         summary: data.summary,
                         healthScore: data.healthScore,
-                        stepBYstep: data.analyzedInstructions[0].steps.map(e => e.number  + ': ' + e.step),
+                        stepBYstep: data.analyzedInstructions[0].steps.map(e => /* e.number  + ': ' + */ e.step),
                         diets: data.diets,
                         image: data.image
                     };

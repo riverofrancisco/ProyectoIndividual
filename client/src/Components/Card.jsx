@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function Card({id, title, summary, healthScore, image, diets}){
 
-    const PATH = `/home/${id}`
+    const PATH = `/home/recipedetail/${id}`
     return (
         <div className='card'>
             <Link to = {PATH}>

@@ -2,11 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import './NavBar.css'
+import { useDispatch } from 'react-redux';
+import { getRecipes } from '../actions/actions';
 
 export default function Navbar({findRecipe}){
+    const dispatch = useDispatch();
+    
+    
     return (
        <nav>
-            <Link to ='/home'>
+            <Link to ='/home' onClick={dispatch(getRecipes())}>
              Home Page
             </Link>
             
@@ -18,11 +23,11 @@ export default function Navbar({findRecipe}){
              Filter by diet-type
             </Link>
 
-            <Link to ='/home/creation-form'>
+            <Link to ='/home/creationform'>
              Add your own recipe
             </Link>
 
-            <Link to ='/home/our-diets'>
+            <Link to ='/home/diets'>
              Our Diets
             </Link>
 

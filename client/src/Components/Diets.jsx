@@ -2,7 +2,7 @@ import {React, useEffect} from 'react';
 import './Card.css';
 
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipes, getDiets } from "../actions/actions";
+import { getDiets } from "../actions/actions";
 
 
 export default function Diets(){
@@ -19,7 +19,7 @@ export default function Diets(){
     return (
         <div className='card'>
             <div className='card-body'>
-                <p>{allDiets}</p>
+                <ol>{allDiets?.map((diet) => {return (<li key={diet}>{diet}</li>)})}</ol>
             </div>       
        </div>
     );

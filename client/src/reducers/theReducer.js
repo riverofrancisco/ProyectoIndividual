@@ -17,10 +17,6 @@ const theReducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload};
-        case 'GET_RECIPES':
-            return {
-                ...state,
-                recipes: action.payload};
         case 'GET_DIETS':
             return {
                 ...state,

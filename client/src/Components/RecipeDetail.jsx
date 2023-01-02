@@ -21,10 +21,10 @@ useEffect(() => {
     
     return (
         
-        <div className='detail'>
-            <Link to = '/home'  className="button">
+        <div className='detail' key={id}>
+ {/*            <Link to = '/home'  className="button">
                 <button>←</button>
-            </Link>
+            </Link> */}
             
             <div >
                 <img src= {image} alt="PhotoHere" />
@@ -39,8 +39,8 @@ useEffect(() => {
 
                 <p>{summary}</p>
                 
-                <ul>{stepBYstep?.map((step) => {return (<li>{step}</li>)})}
-                </ul>
+                <ol>{stepBYstep?.map((step) => {return (<li key={step}>{step}</li>)})}
+                </ol>
 
             </div> 
             </div>
