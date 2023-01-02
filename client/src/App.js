@@ -7,6 +7,7 @@ import Welcomepage from './Components/Welcome';
 import Navbar from './Components/NavBar';
 import Diets from './Components/Diets';
 import RecipeDetail from './Components/RecipeDetail'
+import Form from './Components/Form';
 
 
 function App() {
@@ -38,6 +39,10 @@ function App() {
           component={RecipeDetail}
           />
 
+          <Route 
+          path = '/home/creationform'
+          component={Form}
+          />
       <hr />
     </div>
   );
