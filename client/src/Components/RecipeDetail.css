@@ -5,9 +5,8 @@
     justify-content: center;
 }
 
-.button {
+ .button {
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
     justify-self: left;
 }

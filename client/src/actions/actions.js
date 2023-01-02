@@ -16,9 +16,17 @@ export const getRecipeDetail = (id) => {
 }
 
 export const getDiets = () => { 
-    return async (dispatch) => {
-        let json = await fetch('http://localhost:3001/diets').then(response => response.json());
-
-        return dispatch({type: 'GET_DIETS', payload: json});
-    }
+  return (dispatch) => {
+    fetch(`http://localhost:3001/diets`).then(response => response.json())
+    .then(data => {return dispatch({type: 'GET_DIETS', payload: data})})
+    .catch((e) => console.log('Error:', e));
+  }
 }  
+
+export const findRecipeByTitle = (title) => {
+  return (dispatch) => {
+    fetch(`http://localhost:3001/recipes?name=${title}`).then(response => response.json())
+    .then(data => {return dispatch({type: 'FIND_RECIPE_TITLE', payload: data})})
+    .catch((e) => console.log('Error:', e));
+  }
+}

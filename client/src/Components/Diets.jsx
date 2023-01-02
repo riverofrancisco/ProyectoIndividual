@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useEffect} from 'react';
 import './Card.css';
 
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +9,11 @@ export default function Diets(){
 
 
     const dispatch = useDispatch();
-    const allRecipes = useSelector((state) => state.recipes);
     const allDiets = useSelector((state) => state.diets);
+
+    useEffect(() => {
+        dispatch(getDiets());
+      }, [dispatch]);
 
 
     return (

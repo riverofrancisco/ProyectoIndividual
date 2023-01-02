@@ -21,26 +21,28 @@ useEffect(() => {
     
     return (
         
-        <div>
-            <Link to = '/home' >
-                <button className="button">←</button>
+        <div className='detail'>
+            <Link to = '/home'  className="button">
+                <button>←</button>
             </Link>
             
-            <div className='detail'>
+            <div >
                 <img src= {image} alt="PhotoHere" />
             
             <div className='card-title'>
                     <h1>{title}</h1>
-                    <h2>Diets: {diets.join(', ')}</h2>
+                    <h2>Diets: {diets?.join(', ')}</h2>
             </div>
            <div className='card-body'>
             <h3>HealthScore: {healthScore}</h3>
-                <h4>Step by Step</h4>   
+                <h4>Step by Step</h4>
+
                 <p>{summary}</p>
+                
                 <ul>{stepBYstep?.map((step) => {return (<li>{step}</li>)})}
                 </ul>
 
-            </div>
+            </div> 
             </div>
        </div>
     );

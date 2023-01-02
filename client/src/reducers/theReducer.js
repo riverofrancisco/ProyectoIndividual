@@ -13,7 +13,14 @@ const theReducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload};
-
+        case 'FIND_RECIPE_TITLE':
+            return {
+                ...state,
+                recipes: action.payload};
+        case 'GET_RECIPES':
+            return {
+                ...state,
+                recipes: action.payload};
         case 'GET_DIETS':
             return {
                 ...state,

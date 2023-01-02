@@ -7,16 +7,20 @@ import './Cards.css';
 
 
 export default function Cards(){
+
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipes);
   
   console.log('Renderizando Recipes')
-   
-  useEffect(() => {
-    console.log(allRecipes);
-    dispatch(getRecipes());
-    console.log(allRecipes);
-  }, [dispatch]);
+  
+  
+    useEffect(() => {
+      console.log(allRecipes);
+      dispatch(getRecipes());
+      console.log(allRecipes);
+    }, [dispatch]);
+  
+
 
 
   return (
