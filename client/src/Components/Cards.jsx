@@ -7,9 +7,10 @@ import './Cards.css';
 
 
 export default function Cards(){
-
-  const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipes);
+  /* const dispatch = useDispatch();
+  const allRecipes = useSelector((state) => state.recipes);
+  
   
   console.log('Renderizando Recipes')
   
@@ -19,9 +20,7 @@ export default function Cards(){
       dispatch(getRecipes());
       console.log(allRecipes);
     }, [dispatch]);
-  
-
-
+   */
 
   return (
         <div className = 'cards'>

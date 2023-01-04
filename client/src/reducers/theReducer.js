@@ -21,7 +21,11 @@ const theReducer = (state = initialState, action) => {
             return {
                 ...state,
                 diets: action.payload};
-
+        case 'ORDER_RECIPES_AZ':
+            const orderedRecipes = state.recipes.sort((x, y) => x.title.localeCompare(y.title))
+            return {
+                ...state,
+                recipes: orderedRecipes};
         case 'GET_RECIPE_DETAIL':
             return {
                 ...state,

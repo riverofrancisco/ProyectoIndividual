@@ -18,7 +18,7 @@ const [error, setError] = useState('');
 function validateHS(value) {
    /*  var number = /^(100|[1-9][0-9]?)$/; */ // Expresion Regular para validar numbers 1-100.
 
-    if(value > 100 || value <= 0) {
+    if(value > 100 || value <= 0) {//chequear si no hay error, limpiar el error.
       console.log('entro al if')
       setError('El healthScore debe ser un número entre el 1 y el 100');
     } else {

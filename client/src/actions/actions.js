@@ -30,3 +30,7 @@ export const findRecipeByTitle = (title) => {
     .catch((e) => console.log('Error:', e));
   }
 }
+
+export const alphabeticOrder = () => {
+  return {type: 'ORDER_RECIPES_AZ'}
+}

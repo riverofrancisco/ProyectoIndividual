@@ -8,9 +8,13 @@ import Navbar from './Components/NavBar';
 import Diets from './Components/Diets';
 import RecipeDetail from './Components/RecipeDetail'
 import Form from './Components/Form';
+import Reparation from './Components/Inreparation';
+import { useDispatch, useSelector } from "react-redux";
 
 
 function App() {
+
+
 
   return (
     <div className="App">
@@ -33,6 +37,16 @@ function App() {
           path = '/home/diets' 
           component={Diets}
           />
+          
+          <Route 
+          path = '/home/azorder' 
+          component={Reparation}
+          />
+
+          <Route 
+          path = '/home/filterbydiet' 
+          component={Reparation}
+          />
 
           <Route 
           path = '/home/recipedetail/:id'
@@ -43,7 +57,6 @@ function App() {
           path = '/home/creationform'
           component={Form}
           />
-      <hr />
     </div>
   );
 }
