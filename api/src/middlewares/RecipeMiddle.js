@@ -7,7 +7,7 @@ const {
 let recipes = [];
 
 async function APIrecipes(){
-    const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY_5}&number=100&addRecipeInformation=true`);
+    const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY_2}&number=100&addRecipeInformation=true`);
     const data = await response.json();
     const shortAPIRecipes = data.results.map(r => {return {
         id: 'api' + r.id,
@@ -22,12 +22,24 @@ async function APIrecipes(){
 
 async function DBrecipes(){
     const shortDBRecipes = await Recipe.findAll({
-        attributes: ['id', 'title', 'summary', 'healthScore', 'image'],
+        /* attributes: ['id', 'title', 'summary', 'healthScore', 'image'], */
         include: {
             model: Diet,
-            attributes: ['name']
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            }
+        }
         },
-    })//continuar revisando lo que recibo.
+    ).then((data) => data.map(element => {
+        return {
+            ...element.dataValues,
+            diets: element.dataValues.diets.map(diet => diet.name)
+        };
+    })
+    );
+
+    //continuar revisando lo que recibo.
     return shortDBRecipes;
 };
 
@@ -42,7 +54,7 @@ const THErecipe = recipes.filter(r => r.id.toString() === idReceta)
 if(THErecipe.length > 0){
      if(idReceta[0] === 'a'){ 
         let ID = idReceta.slice(3);
-        const response = await fetch(`${API_PATH}/${ID}/information?apiKey=${MY_APIKEY_5}`);
+        const response = await fetch(`${API_PATH}/${ID}/information?apiKey=${MY_APIKEY_2}`);
         const data = await response.json();
         const APIoneRecipe = {
                         id: 'api' + data.id,
@@ -59,11 +71,17 @@ if(THErecipe.length > 0){
             where: { id: idReceta },
             include: {
                 model: Diet,
-                attributes: ['name']
+                attributes: ["name"],
+                through: {
+                  attributes: [],
+                }
             },
-        })
-/*         const datadiets = DBoneRecipe.diets.forEach(element => {return element.name});
-        DBoneRecipe.diets = datadiets; */
+        }).then((data) => {return {
+                ...data.dataValues,
+                diets: data.dataValues.diets.map(diet => diet.name)
+            };
+        });
+
         return DBoneRecipe;
     }
 } else {
