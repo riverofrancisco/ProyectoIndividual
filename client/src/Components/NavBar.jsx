@@ -18,7 +18,8 @@ export default function Navbar({setOrder}){
             dispatch(alphabeticOrder(e.target.value))
             setOrder(e.target.value);
         } else {
-            dispatch(healthScoreOrder(e.target.value))
+            dispatch(healthScoreOrder(e.target.value));
+            setOrder(e.target.value)
         }
     }
 
