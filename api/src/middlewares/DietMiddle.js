@@ -6,11 +6,7 @@ const {
 
   let diets = [];
 
-async function getDiets(){
-  diets = await Diet.findAll();
-  if(diets.length){ 
-      return diets;
-  } else {
+ async function APIdiets(){
       const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY}&number=100&addRecipeInformation=true`);
       const data = await response.json();
       const apidiets = data.results.map(r => r.diets);
@@ -20,11 +16,35 @@ async function getDiets(){
       const ExistingDiets = diets.filter((diet, index) => {
         return diets.indexOf(diet) === index;
       }
-    );
-      return ExistingDiets.sort();
-  }
- } 
+    );  
+    
+    return ExistingDiets.sort()/* .forEach((diet) => {return Diet.create({
+      name: diet
+    })});
+
+    const DBdietsOBJ = await Diet.findAll({
+      attributes: ['name']
+    });
+
+    const DBdietsARRAY = DBdietsOBJ.map((obj) => obj.name);
+    return DBdietsARRAY */
+};
+
+
+/* async function AllDBdiets () {
+    const APIdiets = await APIdiets();
+        APIdiets.forEach((diet) => Diet.create({
+      name: diet
+    }));
+
+    const DBdietsOBJ = await Diet.findAll({
+      attributes: ['name']
+    });
+
+    DBdietsOBJ.map((obj) => obj.name) 
+    return APIdiets;
+} */
 
 module.exports = {
-  getDiets
+  APIdiets
 }

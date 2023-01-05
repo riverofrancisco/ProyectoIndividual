@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Router } = require('express');
 const { Recipe, Diet } = require('../db');
-const { getDiets } = require('../middlewares/DietMiddle')
+const { AllDBdiets, APIdiets, DBdiets } = require('../middlewares/DietMiddle')
 const router = Router();
 const {
     MY_APIKEY, MY_SECOND_APIKEY
@@ -11,10 +11,10 @@ const {
   
 router.get('/', async (req, res) => {
 try{
- const diets = await getDiets();
+ const diets = await APIdiets();
  res.status(200).json(diets);
 } catch (e){
- res.status(400).send(e);
+ res.status(400).json({Error: e});
 }
 });
 
