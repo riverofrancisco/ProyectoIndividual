@@ -8,21 +8,6 @@ import { getRecipes, getDiets } from "../actions/actions";
 
 export default function Welcomepage(){
     
-
-    const dispatch = useDispatch();
-    const allRecipes = useSelector((state) => state.recipes);
-      
-      
-      console.log('Renderizando Recipes')
-      
-      
-        useEffect(() => {
-          console.log(allRecipes);
-          dispatch(getRecipes());
-          console.log(allRecipes);
-        }, [dispatch]);
-    
-    
     return (
         <div className='cuerpo'>
             <div>

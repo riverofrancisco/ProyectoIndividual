@@ -22,10 +22,27 @@ const theReducer = (state = initialState, action) => {
                 ...state,
                 diets: action.payload};
         case 'ORDER_RECIPES_AZ':
-            const orderedRecipes = state.recipes.sort((x, y) => x.title.localeCompare(y.title))
             return {
                 ...state,
-                recipes: orderedRecipes};
+                recipes: state.recipes.sort((x, y) => {
+                    if(action.payload === 'az'){
+                        x.title.localeCompare(y.title)}
+                    else {y.title.localeCompare(x.title)}})
+                };
+/*         case 'ORDER_RECIPES_HS':
+            return {
+                ...state,
+                recipes: state.recipes.sort((a, b) => {
+                    if(action.payload === 'HSasc'){
+                        b.healthScore - a.healthScore
+                    } else {
+                        a.healthScore - b.healthScore}})                
+                }; */
+        case 'FILTER_BY_DIET':
+            return {
+                ...state,
+                recipes: state.recipes.filter((recipe) => recipe.diets.join(' ').includes(action.payload))
+            }
         case 'GET_RECIPE_DETAIL':
             return {
                 ...state,

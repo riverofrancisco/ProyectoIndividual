@@ -9,7 +9,6 @@ export default function SearchBar () {
 
   const [title, setTitle] = useState('');
   const dispatch = useDispatch();
-  const filterRecipes = useSelector((state) => state.recipes);
 
 
  return (

@@ -1,30 +1,34 @@
-import {React, useEffect } from "react";
+import {React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getRecipes, getDiets } from "../actions/actions";
 import Card from "./Card";
 import './Cards.css';
+import Navbar from "./NavBar";
 
 
 export default function Cards(){
-  const allRecipes = useSelector((state) => state.recipes);
-  /* const dispatch = useDispatch();
-  const allRecipes = useSelector((state) => state.recipes);
   
-  
-  console.log('Renderizando Recipes')
-  
-  
-    useEffect(() => {
-      console.log(allRecipes);
-      dispatch(getRecipes());
-      console.log(allRecipes);
-    }, [dispatch]);
-   */
+  const [, setOrder] = useState('');
 
-  return (
+  const allRecipes = useSelector((state) => state.recipes);
+  const dispatch = useDispatch();  
+  
+  useEffect(() => {
+      console.log('Renderizando Recipes')
+      dispatch(getRecipes());
+      dispatch(getDiets());
+  }, [dispatch]);
+  
+
+
+  return (    
         <div className = 'cards'>
-         
+          
+          <div>
+          <Navbar setOrder={setOrder}/>
+          </div>
+
           {allRecipes.map((r) => {return (<Card
               key={r.id}
               id={r.id}
@@ -33,7 +37,6 @@ export default function Cards(){
               summary={r.summary}
               image={r.image}
               diets={r.diets.join(', ')}
-         
           />) })}
             
         </div>

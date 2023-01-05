@@ -1,13 +1,13 @@
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const { Recipe, Diet } = require('../db');
 const {
-    MY_APIKEY, MY_APIKEY_2, MY_APIKEY_3, MY_APIKEY_4, MY_APIKEY_5, API_PATH
+    MY_APIKEY, MY_APIKEY_2, MY_APIKEY_3, MY_APIKEY_4, MY_APIKEY_5, MY_APIKEY_6, API_PATH
   } = process.env;
 
 let recipes = [];
 
 async function APIrecipes(){
-    const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY_2}&number=100&addRecipeInformation=true`);
+    const response = await fetch(`${API_PATH}/complexSearch?apiKey=${MY_APIKEY}&number=100&addRecipeInformation=true`);
     const data = await response.json();
     const shortAPIRecipes = data.results.map(r => {return {
         id: 'api' + r.id,
@@ -54,7 +54,7 @@ const THErecipe = recipes.filter(r => r.id.toString() === idReceta)
 if(THErecipe.length > 0){
      if(idReceta[0] === 'a'){ 
         let ID = idReceta.slice(3);
-        const response = await fetch(`${API_PATH}/${ID}/information?apiKey=${MY_APIKEY_2}`);
+        const response = await fetch(`${API_PATH}/${ID}/information?apiKey=${MY_APIKEY}`);
         const data = await response.json();
         const APIoneRecipe = {
                         id: 'api' + data.id,
@@ -77,11 +77,10 @@ if(THErecipe.length > 0){
                 }
             },
         }).then((data) => {return {
-                ...data.dataValues,
+                ...data.dataValues,//porqué funciona con datavalues? buscar el funcionamiento de esta propiedad.
                 diets: data.dataValues.diets.map(diet => diet.name)
             };
         });
-
         return DBoneRecipe;
     }
 } else {

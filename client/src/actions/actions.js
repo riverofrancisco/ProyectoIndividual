@@ -31,6 +31,14 @@ export const findRecipeByTitle = (title) => {
   }
 }
 
-export const alphabeticOrder = () => {
-  return {type: 'ORDER_RECIPES_AZ'}
+export const alphabeticOrder = (data) => {
+  return {type: 'ORDER_RECIPES_AZ', payload: data}
+}
+
+export const healthScoreOrder = (data) => {
+  return {type: 'ORDER_RECIPES_HS', payload: data}
+}
+
+export const filterByDiet = (data) => {
+  return {type: 'FILTER_BY_DIET', payload: data}
 }

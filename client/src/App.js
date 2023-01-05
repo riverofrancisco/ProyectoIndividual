@@ -15,39 +15,28 @@ import { useDispatch, useSelector } from "react-redux";
 function App() {
 
 
-
   return (
-    <div className="App">
+        <div className="App">
         <Route 
           exact path = '/' 
           component={Welcomepage} 
           />
-
+{/* 
           <Route 
           path = '/home' 
-          component = {Navbar}
-          />
+          component= {Navbar}
+          /> */}
 
           <Route 
           exact path = '/home' 
           component={Cards}
           />
 
-          <Route 
+{/*           <Route 
           path = '/home/diets' 
           component={Diets}
-          />
+          /> recorda buscar metodo history de react router dom*/}
           
-          <Route 
-          path = '/home/azorder' 
-          component={Reparation}
-          />
-
-          <Route 
-          path = '/home/filterbydiet' 
-          component={Reparation}
-          />
-
           <Route 
           path = '/home/recipedetail/:id'
           component={RecipeDetail}

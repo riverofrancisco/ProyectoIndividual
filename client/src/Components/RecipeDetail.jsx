@@ -1,12 +1,13 @@
 import {React, useEffect } from "react";
 import './RecipeDetail.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipeDetail } from "../actions/actions";
 
 
 export default function RecipeDetail(){
 
+const history = useHistory();
 const dispatch = useDispatch();
 const { title, image, summary, healthScore, diets, stepBYstep} = useSelector((state) => state.recipe);
   
@@ -22,9 +23,8 @@ useEffect(() => {
     return (
         
         <div className='detail' key={id}>
- {/*            <Link to = '/home'  className="button">
-                <button>←</button>
-            </Link> */}
+            <button onClick={() => history.push('/home')}>←</button>
+            
             
             <div >
                 <img src= {image} alt="PhotoHere" />
