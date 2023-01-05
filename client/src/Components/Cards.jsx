@@ -58,12 +58,16 @@ export default function Cards(){
               summary={r.summary}
               image={r.image}
               diets={r.diets.join(', ')}
-          />) })}
-            
-          <Pagination 
+          />) })} 
+        
+        
+        <div>
+        <Pagination 
               recipesPerPage={recipesPerPage} 
               totalRecipes={allRecipes.length}
               paginate={paginate} />
+        </div>
+
         </div>
       );
 
