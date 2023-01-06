@@ -12,6 +12,7 @@ const {
 router.get('/', async (req, res) => {
 try{
  const diets = await APIdiets();
+ console.log(diets)
  res.status(200).json(diets);
 } catch (e){
  res.status(400).json({Error: e});
