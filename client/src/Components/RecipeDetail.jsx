@@ -26,21 +26,24 @@ useEffect(() => {
             <button onClick={() => history.push('/home')}>←</button>
             
             
-            <div >
+            <div>
                 <img src= {image} alt="PhotoHere" />
             
             <div className='card-title'>
                     <h1>{title}</h1>
                     <h2>Diets: {diets?.join(', ')}</h2>
             </div>
-           <div className='card-body'>
+            <div className='card-body'>
             <h3>HealthScore: {healthScore}</h3>
-                <h4>Step by Step</h4>
-
-                <p>{summary}</p>
                 
+            <p>{summary}</p>
+                
+            <div>
+                <h4>Step by Step</h4>
                 <ol>{stepBYstep?.map((step) => {return (<li key={step}>{step}</li>)})}
                 </ol>
+            </div>
+
 
             </div> 
             </div>

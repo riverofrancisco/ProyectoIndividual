@@ -61,7 +61,7 @@ export default function Navbar({setOrder}){
                 <label>Filter by diet-type:</label>
                 <select onChange={(e)=> handleFilter(e)}>
                     <option>--- Choose a Diet</option>
-                    <option value='ALL'>All Diets</option>
+                    <option value='ALL'>Clear Filter</option>
                     {allDiets.map(d => {return (<option key={d} value={d} >{d}</option>)})}
                 </select>
             </div>
@@ -74,11 +74,11 @@ export default function Navbar({setOrder}){
                 </button>
             </div>
 
-            <div>
+{/*             <div>
             <Link to ='/home/diets'>
              Our Diets
             </Link>
-            </div>
+            </div> */}
 
             <SearchBar 
             />

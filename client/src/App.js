@@ -21,6 +21,7 @@ function App() {
           exact path = '/' 
           component={Welcomepage} 
           />
+
 {/* 
           <Route 
           path = '/home' 
@@ -31,11 +32,6 @@ function App() {
           exact path = '/home' 
           component={Cards}
           />
-
-{/*           <Route 
-          path = '/home/diets' 
-          component={Diets}
-          /> recorda buscar metodo history de react router dom*/}
           
           <Route 
           path = '/home/recipedetail/:id'

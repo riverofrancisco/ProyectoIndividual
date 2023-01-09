@@ -45,9 +45,9 @@ export default function Cards(){
   return (    
         <div className = 'cards'>
           
-          <div>
+          
           <Navbar setOrder={setOrder}/>
-          </div>
+          
 
 
           {currentRecipes.map((r) => {return (<Card

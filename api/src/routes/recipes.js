@@ -14,23 +14,26 @@ router.post('/', async (req, res) => {
 
     try {
       if (!title || !summary) return res.status(404).send('Falta enviar datos obligatorios');
-      const newRecipe = await Recipe.create({title, summary, healthScore, stepBYstep, image,});
-      if (diet) {//creo una diet 
-        const [newDiet, created]= await Diet.findOrCreate({
-            where: {
-                name: diet
-            }});
-        await newRecipe.addDiet(newDiet);
-/*        diet.forEach(async (d) => {return await Diet.findOrCreate({ where: {name: d}})});
-       diet.forEach(async (d) => {return await newRecipe.addDiet(d)}); */
-      };
+      const newRecipe = await Recipe.create({title, summary, healthScore, stepBYstep, image});
+      
+      if (diet) {//findOrCreate en DB la/s dietas correspondientes
+        for(let i = 0; i < diet.length; i++){
+            const [newDiet, created]= await Diet.findOrCreate({
+                where: {
+                    name: diet[i]
+                }});
+            await newRecipe.addDiet(newDiet);
+        }};
+
       const recipeCreated = await Recipe.findOne({
         where: { title: title },
         include: {
             model: Diet,
-        }
-      })
-      res.status(200).json(recipeCreated);
+        }});
+    
+    console.log(recipeCreated.dataValues);
+    
+    res.status(200).send('La dieta "' + recipeCreated.dataValues.title + '" se ha creado correctamente.');
     } catch(e) {
       res.status(400).json({
         Tipo: 'Ha ocurrido un error',
@@ -39,6 +42,17 @@ router.post('/', async (req, res) => {
     }
 })
 
+///CHEQUEO DB ////
+router.get('/dbcontent', async (req, res) => {
+    try{
+        const DBdata = await Recipe.findAll()
+        res.status(200).json(DBdata)
+    } catch(e) {
+        res.status(404).json({
+            Error: e
+        })
+    }
+})
 
 ///GET ////
 router.get('/', async (req, res) => {
