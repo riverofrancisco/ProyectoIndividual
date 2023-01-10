@@ -10,17 +10,17 @@ const {
 
 ///POST ////
 router.post('/', async (req, res) => {
-    const {title, summary, healthScore, stepBYstep, image, diet} = req.body;
+    const {title, summary, healthScore, stepBYstep, image, diets} = req.body;
 
     try {
       if (!title || !summary) return res.status(404).send('Falta enviar datos obligatorios');
       const newRecipe = await Recipe.create({title, summary, healthScore, stepBYstep, image});
       
-      if (diet) {//findOrCreate en DB la/s dietas correspondientes
-        for(let i = 0; i < diet.length; i++){
+      if (diets) {//findOrCreate en DB la/s dietas correspondientes
+        for(let i = 0; i < diets.length; i++){
             const [newDiet, created]= await Diet.findOrCreate({
                 where: {
-                    name: diet[i]
+                    name: diets[i]
                 }});
             await newRecipe.addDiet(newDiet);
         }};

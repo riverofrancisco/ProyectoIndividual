@@ -1,14 +1,22 @@
 import { React, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
+import { getDiets } from '../actions/actions';
 import './Form.css'
 
 
 export default function Form(){
 const history = useHistory();
-  //// STATES //////
+const dispatch = useDispatch();
 
-const allDiets = useSelector((state) => state.diets)
+  //// STATES //////
+const allDiets = useSelector((state) => state.diets);
+
+useEffect(()=>{
+  if(allDiets.length === 0){
+    dispatch(getDiets())}
+}, [dispatch])
+
 const [input, setInput] = useState({
     title: '',
     summary: '',
@@ -17,14 +25,16 @@ const [input, setInput] = useState({
     diets: [],
     image: '',
 })
-const [currentStep, setCurrentStep] = useState({description: ''})
-const [error, setError] = useState('');
+const [currentStep, setCurrentStep] = useState({description: ''});
+const [newDiet, setNewDiet] = useState({name: ''})
+const [error, setError] = useState(' ');
+
 
 //// VALIDATIONS ///////
 function validateHS(e) {//Numero entre 1 y 100
     const {value, name} = e.target;
     
-    if(value > 100 || value <= 0) {//chequear si no hay error, limpiar el error.
+    if(value > 100 || value <= 0) {
       console.log(`${value} no cumple con el HS`)
       setError('El healthScore debe ser un número entre el 1 y el 100');
     } else {
@@ -36,17 +46,23 @@ function validateHS(e) {//Numero entre 1 y 100
     }
   };
 
-  function validateTitle(e) {//No puede tener simbolos.
+  function validateTyS(e) {//No puede tener simbolos.
     const {value, name} = e.target;
-    
-    if(/[^()[\\]{}*&^%$#@!]+/.test(value)) {//chequear si no hay error, limpiar el error.
-      console.log(`${value} no cumple con el TitLe`)
-      setError('El titulo debe estar compuesto sólo por letras y números');
-    } else {
-      setError('')
-      setInput({
-        ...input,
-        [name] : value
+
+    if(!value) {
+      setError('Falta enviar datos obligatorios')
+    } else if (name === 'title'){
+        if('condition' === 0){
+          console.log(`${value} no cumple con el TitLe`)
+          setError('El titulo debe contener sólo letras y/o números');
+        } else {setInput({
+                          ...input,
+                          [name] : value})};
+      } else {
+              setError('')
+              setInput({
+                ...input,
+                [name] : value
       })
     }
   };
@@ -66,6 +82,7 @@ function validateHS(e) {//Numero entre 1 y 100
     }
   };
 
+
 //// HANDLES ///////
 const handleChange = (event) => {
     const {value, name} = event.target;
@@ -74,6 +91,10 @@ const handleChange = (event) => {
             setCurrentStep({
               description: value
             })
+    } else if (name === 'newDiet') {
+            setNewDiet({
+              name: value.toLowerCase()
+            })
     } else {
             setInput({...input,
               [name]: value
@@ -81,6 +102,7 @@ const handleChange = (event) => {
     } 
 };
 
+//// DINAMIC INPUTS ////////
 const handleStepsChange = (event) => {
   const steps = [...input.stepBYstep];
   steps[event.target.id] = event.target.value;
@@ -91,44 +113,90 @@ const handleStepsChange = (event) => {
   })
 }
 
+const handleDietChange = (event) => {
+  const selecteDiets = [...input.diets];
+  selecteDiets[event.target.id] = event.target.value;
+
+  setInput({
+    ...input,
+    diets: selecteDiets
+  })
+}
 
 const Adder = (event) => {
   const {name, value} = event.target;
-  if(name === 'AddStep'){
+  if (name === 'AddStep') {
     var step = currentStep;
     setInput({
       ...input,
       stepBYstep: [...input.stepBYstep , step.description]
-    })
+    });
     setCurrentStep({description: ''})
 
-  } else if (name === 'diets') {
+  } else if (name === 'AddDiet') {
+    var diet = newDiet;
     setInput({
       ...input,
-      [name]: [...name , value]
-    })
+      diets: [...input.diets , diet.name]
+    });
+    setNewDiet({name: ''})
+  } else if (name === 'AddExDiet') {
+    setInput({
+      ...input,
+      diets: [...input.diets , value]
+    })  
   }
 }
 
 const Deleter = (e) => {
   e.preventDefault();
-  const {id} = e.target;
-  console.log(id)
-  const tobeDeleted = document.getElementById(id[0]);
-  console.log(tobeDeleted);
-  let steps = [...input.stepBYstep];
-  console.log(steps);
-  let newSteps = steps.filter((element) => element !== tobeDeleted.value);
-  console.log(newSteps);
-  setInput({
-    ...input,
-    stepBYstep: newSteps
-  })
+  const {name, value, id} = e.target;
+  console.log(id);
+  if(name === 'step'){
+      const tobeDeleted = document.getElementById(`${id[0]}step`);
+      console.log(tobeDeleted);
+      let steps = [...input.stepBYstep];
+      console.log(steps);
+      let newSteps = steps.filter((element) => element !== tobeDeleted.value);
+      console.log(newSteps);
+      setInput({
+        ...input,
+        stepBYstep: newSteps
+      });
+    } else if (name === 'diet') {
+      const tobeDeleted = document.getElementById(`${id[0]}diet`);
+      console.log(tobeDeleted);
+      let currentDiets = [...input.diets];
+      console.log(currentDiets);
+      let newDiets = currentDiets.filter((element) => element !== tobeDeleted.value);
+      console.log(newDiets);
+      setInput({
+        ...input,
+        diets: newDiets
+      });
+  }
+  
+  
 }
 
 //// SUBMIT ///////
+const enableSubmit = () => {
+  const submitButton = document.getElementById("btnSubmit");
+  if(error !== ''){
+    submitButton.disabled = true;
+  } else {
+    submitButton.disabled = false;
+  }
+} 
+
+useEffect(() => {
+  enableSubmit()
+})
+
 const onSubmit = (event) => {
+  
   event.preventDefault();
+  console.log(input)
   
   fetch('http://localhost:3001/recipes',{
     method: 'POST',
@@ -138,19 +206,20 @@ const onSubmit = (event) => {
     }
   })
 
+  alert(`Recipe "${input.title}" created succesfully.`)
+  history.push("/home");
+
   console.log('Receta creada');
-
+  
   setInput({    
-  title: '',
-  summary: '',
-  healthScore: 0,
-  stepBYstep: [],
-  diets: [],
-  image: '',
-  })
+              title: '',
+              summary: '',
+              healthScore: 0,
+              stepBYstep: [],
+              diets: [],
+              image: '',
+              }) 
 }
-
-
 
     return (
         <div className='inputs'>
@@ -161,13 +230,13 @@ const onSubmit = (event) => {
                 name="title"
                 type="text"
                 value={input.name}
-                onChange={(e) => validateTitle(e)}
+                onChange={(e) => validateTyS(e)}
                 placeholder="Title" />
              <input
                 name="summary"
                 type="text"
                 value={input.name}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => validateTyS(e)}
                 placeholder="Summary" />
              
              <input className={error && 'danger'}
@@ -187,38 +256,45 @@ const onSubmit = (event) => {
             <input type="button" name="AddStep" value="AddStep" onClick={Adder}/>
                 
                 {input.stepBYstep.map((el,i) => (
-                  <div key={i}>
+                  <div key={i+'inputStepKey'}>
                     <label htmlFor={i}>Step {i + 1}</label>
                     <input 
                           name="stepBYstep"
-                          id={i}a
+                          id={`${i}step`}
                           type='text'
                           value={el}
                           onChange={(e) => handleStepsChange(e)} />
-                    <button id={i+'a'} onClick={(e) => Deleter(e)}> x </button>
+                    <button name='step' id={i+'ST'} onClick={(e) => Deleter(e)}> x </button>
                   </div>
                 ))}
             
-            {allDiets.map((diet) => {
-              return (
-                <div key={diet}>
-                  <label htmlFor='diets'>{diet}</label>
-                <input
-                type='checkbox'
-                name='diets'
-                value={input.name}
-                onChange={(e) => handleChange(e)}  />
-                </div>
-                
-              )
-            })}
-
-              <input
-                name="diets"
+            <input
+                name="newDiet"
                 type="text"
-                value={input.name}
+                value={newDiet.name}
                 onChange={(e) => handleChange(e)}
-                placeholder="New diet" />
+                placeholder="Diet" /> 
+          
+            <input type="button" name="AddDiet" value="Add Other Diet" onClick={Adder}/>
+
+            <select name="AddExDiet" onChange={Adder}>
+                    <option>--- Select from our Diets</option>
+                    {allDiets.map((d,i) => {return (<option key={i+'globalDietKey'} id={`${i}exDiet`} value={d}>{d}</option>)})}
+                </select>           
+            
+
+            {input.diets.map((el,i) => (
+                  <div key={i+'inputDietKey'}>
+                    <label htmlFor={i}>Diet {i + 1}</label>
+                    <input 
+                          name="diets"
+                          id={`${i}diet`}
+                          type='text'
+                          value={el}
+                          onChange={(e) => handleDietChange(e)} />
+                    <button name='diet' id={i+'DT'} onClick={(e) => Deleter(e)}> x </button>
+                  </div>
+                ))}
 
               <input
                 name="image"
@@ -228,7 +304,7 @@ const onSubmit = (event) => {
                 placeholder="Insert url" />
 
             {!error ? null : <div>{error}</div>}
-            <input type="submit" value="Add Recipe" />
+            <input id="btnSubmit" type="submit" value="Add Recipe" />
         </form>
         </div>
 
