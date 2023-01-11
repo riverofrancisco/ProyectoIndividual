@@ -9,7 +9,7 @@
     display: flex;
     align-items: flex-start;
     justify-self: left;
-    margin: 20px;
+    margin: 2%;
 
     background-color: brown;
     color: whitesmoke;
@@ -31,8 +31,7 @@
     color: brown;
     border: brown 1px solid;
     cursor: pointer;
-
-  }
+}
 
 .detailCONT {
     display: flex;
@@ -42,6 +41,7 @@
 
     background-color: whitesmoke;
     width: 50%;
+    margin: 2%;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
     border-radius: 40px;
 }  
@@ -64,28 +64,41 @@
 
 .detail-TITLE-Content { 
     grid-area: title;
+    color: brown;
 }
 
 
 .detail-DIET-Content {
     grid-area: diets;
     background-color: antiquewhite;
+    border-right: whitesmoke 2px solid;
+}
+
+.detail-DIET-Content h3 {
+    color: brown;
 }
 
 .detail-HS-Content {
     grid-area: hs;
     background-color: antiquewhite;
+    border-left: whitesmoke 2px solid;
+    color: brown;
 }
 
 .detail-SUMM-Content {
     grid-area: summ;
     font-style: italic;
+    margin: 5px;
 }
 
 .detail-SBS-Content {
     grid-area: sbs;
     background-color: antiquewhite;
     text-align: center;
+}
+
+.detail-SBS-Content h3 {
+    color: brown;
 }
 
 .SBSlist {

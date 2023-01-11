@@ -1,6 +1,5 @@
 .card {
     margin: 20px;
-    margin-top: 20px;
     width: 18rem;
     background-color: whitesmoke;
     border-radius: 12px;
@@ -20,7 +19,6 @@
     margin-top: 0px !important;
     padding-top: 0px !important;
   }
-  
 
 .img-pequeña{
     width: 88px;

@@ -6,25 +6,22 @@ import Card from "./Card";
 import './Cards.css';
 import Navbar from "./NavBar";
 import Pagination from "./Pagination";
+import Loading from "./LoadingPage";
 
 
 export default function Cards(){
   
   const [, setOrder] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const allRecipes = useSelector((state) => state.recipes);
   const dispatch = useDispatch();  
   
   useEffect(() => {
       console.log('Renderizando Recipes')
-      setLoading(true);
       dispatch(getRecipes());
       dispatch(getDiets());
-      setLoading(false);
   }, [dispatch]);
   
-
 
   ///// PAGINATION /////////
   const [currentPage, setcurrentPage] = useState(1);
@@ -36,12 +33,12 @@ export default function Cards(){
 
   const paginate = (pageNumber) => setcurrentPage(pageNumber);
 
-  if(loading){
+  if(!allRecipes[0]){
     return(
-          <h2>Loading...</h2>
-    )
+      <Loading />
+  )
   }
-
+  
   return (    
         <div>
           
