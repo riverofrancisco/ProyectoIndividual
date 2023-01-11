@@ -9,7 +9,7 @@ export default function Form(){
 const history = useHistory();
 const dispatch = useDispatch();
 
-  //// STATES //////
+//// STATES //////
 const allDiets = useSelector((state) => state.diets);
 
 useEffect(()=>{
@@ -25,10 +25,10 @@ const [input, setInput] = useState({
     diets: [],
     image: '',
 })
+
 const [currentStep, setCurrentStep] = useState({description: ''});
 const [newDiet, setNewDiet] = useState({name: ''})
 const [error, setError] = useState(' ');
-
 
 //// VALIDATIONS ///////
 function validateHS(e) {//Numero entre 1 y 100
@@ -70,15 +70,16 @@ function validateHS(e) {//Numero entre 1 y 100
   function validateImage(event) {//debe ser una url.
     const {value, name} = event.target;
     
-    if(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(value)) {//chequear si no hay error, limpiar el error.
-      console.log(`${value} no cumple con el formato Image`)
-      setError('El valor ingresado en Image debe ser una URL');
+    
+    if(/https:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(value)) {//chequear si no hay error, limpiar el error.
+    setError('')
+    setInput({
+      ...input,
+      [name] : value
+    })
     } else {
-      setError('')
-      setInput({
-        ...input,
-        [name] : value
-      })
+      setError('El valor ingresado en Image debe ser una URL');
+      console.log(`${value} no cumple con el formato Image`)
     }
   };
 
@@ -275,7 +276,7 @@ const onSubmit = (event) => {
                 onChange={(e) => handleChange(e)}
                 placeholder="Diet" /> 
           
-            <input type="button" name="AddDiet" value="Add Other Diet" onClick={Adder}/>
+            <input type="button" name="AddDiet" value="AddDiet" onClick={Adder}/>
 
             <select name="AddExDiet" onChange={Adder}>
                     <option>--- Select from our Diets</option>
@@ -302,6 +303,11 @@ const onSubmit = (event) => {
                 value={input.name}
                 onChange={(e) => validateImage(e)}
                 placeholder="Insert url" />
+              
+              <div>
+                <h5>Image Preview</h5>
+                <img className='img-mediana' src={input.image ? input.image : 'https://i.pinimg.com/originals/dd/08/4f/dd084ff0b0739c6bf1268d5e815ee7a1.png '} alt='preview'/>
+                </div>
 
             {!error ? null : <div>{error}</div>}
             <input id="btnSubmit" type="submit" value="Add Recipe" />

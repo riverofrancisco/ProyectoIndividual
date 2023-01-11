@@ -13,3 +13,16 @@
     padding-top: 0px !important;
   }
   
+
+.img-pequeña{
+    width: 88px;
+    height: 50px;
+  }
+.img-mediana{
+    width: 177px;
+    height: 100px;
+  }
+.img-grande{
+    width: 284px;
+    height: 160px;
+  }

@@ -10,7 +10,7 @@ export default function Card({id, title, summary, healthScore, image, diets}){
         <div className='card'>
             <Link to = {PATH}>
                 <div>
-                <img src= {image} alt="PhotoHere" />
+                <img className='img-grande' src= {image} alt="PhotoHere" />
                 </div>
                 <div className='card-title'>
                 <h4>{title}</h4>
