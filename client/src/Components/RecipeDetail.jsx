@@ -23,29 +23,39 @@ useEffect(() => {
     return (
         
         <div className='detail' key={id}>
-            <button onClick={() => history.push('/home')}>←</button>
+            <button className="buttonBack" onClick={() => history.push('/home')}>←</button>
             
             
-            <div>
-                <img src= {image} alt="PhotoHere" />
+            <div className="detailCONT">
+                <img className="detailIMG" src= {image} alt="PhotoHere" />
             
-            <div className='card-title'>
-                    <h1>{title}</h1>
-                    <h2>Diets: {diets?.join(', ')}</h2>
+            <div className='grid-layout'>
+            
+            <div className="detail-TITLE-Content">
+            <h1>{title}</h1>
             </div>
-            <div className='card-body'>
+            
+            <div className="detail-DIET-Content">
+            <h2>Diets: {diets?.join(', ')}</h2>
+            </div>
+                    
+            
+            <div className='detail-HS-Content'>
             <h3>HealthScore: {healthScore}</h3>
-                
+            </div>
+
+            <div className='detail-SUMM-Content'>
             <p>{summary}</p>
+            </div>  
+            
                 
-            <div>
-                <h4>Step by Step</h4>
-                <ol>{stepBYstep?.map((step) => {return (<li key={step}>{step}</li>)})}
+            <div className='detail-SBS-Content'>
+                <h3>Step by Step</h3>
+                <ol className="SBSlist">{stepBYstep?.map((step) => {return (<li key={step}>{step}</li>)})}
                 </ol>
             </div>
+            </div>
 
-
-            </div> 
             </div>
        </div>
     );

@@ -9,16 +9,18 @@ import { getRecipes, getDiets } from "../actions/actions";
 export default function Welcomepage(){
     
     return (
-        <div className='cuerpo'>
-            <div>
-            <button>
-            <Link to='/home'>
-             Go to HomePage
-            </Link>
-            </button>
+        <div className='container'>
 
-            <h1>Henry Food</h1>
-            <h2>It's working</h2>
+            <div className="content">
+            
+            <h1 className='WelcomeTitle'>Food API</h1>
+
+            <Link to='/home'>
+            <button className="button">
+             Go to HomePage
+            </button>
+            </Link>
+            
           </div>
 
         </div>

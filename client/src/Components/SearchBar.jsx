@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findRecipeByTitle } from "../actions/actions";
 
-
+import './SearchBar.css'
 
 export default function SearchBar () {
 
@@ -12,7 +12,7 @@ export default function SearchBar () {
 
 
  return (
-    <form onSubmit={(e) => {
+    <form  onSubmit={(e) => {
         e.preventDefault();
         dispatch(findRecipeByTitle(title));
       }}>
@@ -22,7 +22,7 @@ export default function SearchBar () {
           value={title}
           onChange={e => setTitle(e.target.value)}
         />
-        <input type="submit" value="Buscar" />
+        <input className='searchBarButton' type="submit" value="Search" />
       </form>
  )
 }

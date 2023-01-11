@@ -43,14 +43,16 @@ export default function Cards(){
   }
 
   return (    
+        <div>
+          
+        <div className="navBar">
+        <Navbar setOrder={setOrder}/>
+        </div>  
+        
+          
+
         <div className = 'cards'>
-          
-          
-          <Navbar setOrder={setOrder}/>
-          
-
-
-          {currentRecipes.map((r) => {return (<Card
+        {currentRecipes.map((r) => {return (<Card
               key={r.id}
               id={r.id}
               title={r.title}
@@ -59,6 +61,8 @@ export default function Cards(){
               image={r.image}
               diets={r.diets.join(', ')}
           />) })} 
+        </div>
+          
         
         
         <div>

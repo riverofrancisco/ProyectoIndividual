@@ -2,12 +2,16 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 2px;
   }
 
-  .nav {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-around;
-  }
+body {
+  background-image: url('https://media.istockphoto.com/id/1162090981/photo/wood-table-top-on-blur-kitchen-counter-background.jpg?s=612x612&w=0&k=20&c=hcNvWdfB0Ua0AOrgDsjgrvtxkX26lwd-E5WXslQ2cKQ=');
+  background-size: cover;
+}
 
+.navBar {
+  display: flex;
+  margin-bottom: 1cm;
+  margin-top: 2px;
+}

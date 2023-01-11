@@ -1,7 +1,15 @@
 .card {
     margin: 20px;
+    margin-top: 20px;
     width: 18rem;
+    background-color: whitesmoke;
+    border-radius: 12px;
   }
+
+.card:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: white;
+}
   
 .card-title {
     margin-bottom: 15px;
@@ -25,4 +33,6 @@
 .img-grande{
     width: 284px;
     height: 160px;
+    border-radius: 12px;
+    margin-top: 2px;
   }

@@ -25,7 +25,7 @@ export default function Navbar({setOrder}){
 
     ///// FILTER BY DIET ////////
     const [filterDiets, setfilterDiets] = useState([]);
-
+ 
     const handleFilter = (e) => {
         if(e.target.value === 'ALL'){
             setfilterDiets([])
@@ -39,17 +39,22 @@ export default function Navbar({setOrder}){
 
     return (
        <div>
-       <nav>
-            <div onClick={() => window.location.reload()}>
-                <Link to ='/home'>
-                Home Page
-                </Link>
-            </div>
+       <nav className='headerNavbar'>
+            <Link to ='/home'>
+ {/*            <div>
+            <img className='logo' src='https://ih1.redbubble.net/image.545261467.0310/st,small,507x507-pad,600x600,f8f8f8.u1.jpg' alt='logo' />
+            </div> */}
            
-            <div>
+            <div className='buttonLink' onClick={() => window.location.reload()}>
+                <label>Home Page</label>    
+            </div>
+            
+                
+            </Link>
+            <div className='buttonLink'>
                 <label>Order by:</label>
-                <select onChange={(e)=> handleOrder(e)}>
-                    <option >Choose order</option>
+                <select className='selectMenu' onChange={(e)=> handleOrder(e)}>
+                    <option >Order By</option>
                     <option value='az'>Title A-Z</option>
                     <option value='za'>Title Z-A</option>
                     <option value='HSdes'>HealthScore ↓</option>
@@ -57,21 +62,19 @@ export default function Navbar({setOrder}){
                 </select>
             </div>
             
-            <div>
+            <div className='buttonLink'>
                 <label>Filter by diet-type:</label>
-                <select onChange={(e)=> handleFilter(e)}>
+                <select className='selectMenu' onChange={(e)=> handleFilter(e)}>
                     <option>--- Choose a Diet</option>
                     <option value='ALL'>Clear Filter</option>
                     {allDiets.map(d => {return (<option key={d} value={d} >{d}</option>)})}
                 </select>
             </div>
 
-            <div>
-                <button>
+            <div className='buttonLink'>
                 <Link to ='/home/creationform'>
                 Add your own recipe
                 </Link>                
-                </button>
             </div>
 
 {/*             <div>
@@ -79,12 +82,14 @@ export default function Navbar({setOrder}){
              Our Diets
             </Link>
             </div> */}
-
+            
+            <div className='buttonLink'>
             <SearchBar 
             />
+            </div>
+
             
         </nav>
-        <hr />
         
         {filterDiets.map(d => {return (<div key={d}> {d}</div>)})}
         
