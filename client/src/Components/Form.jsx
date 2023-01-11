@@ -106,7 +106,7 @@ const handleChange = (event) => {
 //// DINAMIC INPUTS ////////
 const handleStepsChange = (event) => {
   const steps = [...input.stepBYstep];
-  steps[event.target.id] = event.target.value;
+  steps[event.target.id[0]] = event.target.value;
 
   setInput({
     ...input,
@@ -116,7 +116,7 @@ const handleStepsChange = (event) => {
 
 const handleDietChange = (event) => {
   const selecteDiets = [...input.diets];
-  selecteDiets[event.target.id] = event.target.value;
+  selecteDiets[event.target.id[0]] = event.target.value;
 
   setInput({
     ...input,
@@ -223,94 +223,117 @@ const onSubmit = (event) => {
 }
 
     return (
-        <div className='inputs'>
-        <button onClick={() => history.push('/home')}>←</button>
-
-        <form onSubmit={onSubmit} className='creationForm'>
-            <input
+        <div className='formContainer'>
+        <button className='buttonBack' onClick={() => history.push('/home')}>←</button>
+        
+        <form className='form-Container' onSubmit={onSubmit}>
+            <div className='input-label'>
+            <label className='label' htmlFor='title'>Title</label>
+            <input className={error.includes('datos obligatorios') && 'danger'}
                 name="title"
                 type="text"
                 value={input.name}
                 onChange={(e) => validateTyS(e)}
                 placeholder="Title" />
-             <input
+            </div>
+            
+            <div className='input-label'>
+            <label htmlFor='summary'>Summary</label>
+             <input className={error.includes('datos obligatorios') && 'danger'}
                 name="summary"
                 type="text"
                 value={input.name}
                 onChange={(e) => validateTyS(e)}
                 placeholder="Summary" />
-             
-             <input className={error && 'danger'}
+            </div>
+           
+             <div className='input-label'>
+             <label htmlFor='healthScore'>HealthScore</label>
+             <input className={error.includes('health') && 'danger'}
                 name="healthScore"
                 type="number"
                 value={input.name}
                 onChange={(e) => validateHS(e)}
                 placeholder="HealthScore" />
+             </div>
             
-            <input
+            <div className='input-label'>
+            <label htmlFor='currentStep'>Step-By-Step</label>  
+            <input 
                 name="currentStep"
                 type="text"
                 value={currentStep.description}
                 onChange={(e) => handleChange(e)}
                 placeholder="Step" /> 
 
-            <input type="button" name="AddStep" value="AddStep" onClick={Adder}/>
+            <input className='buttonNormal' type="button" name="AddStep" value="AddStep" onClick={Adder}/>
+            </div>
                 
+            <div >
                 {input.stepBYstep.map((el,i) => (
                   <div key={i+'inputStepKey'}>
                     <label htmlFor={i}>Step {i + 1}</label>
-                    <input 
+                    <input className='inputNormal'
                           name="stepBYstep"
                           id={`${i}step`}
                           type='text'
                           value={el}
                           onChange={(e) => handleStepsChange(e)} />
-                    <button name='step' id={i+'ST'} onClick={(e) => Deleter(e)}> x </button>
+                    <button name='step' className='buttonNormal' id={i+'ST'} onClick={(e) => Deleter(e)}> x </button>
                   </div>
                 ))}
+            </div>
             
-            <input
+            <div className='input-label'>
+            <label htmlFor='newDiet'>Diets</label>
+            <input className='inputNormal'
                 name="newDiet"
                 type="text"
                 value={newDiet.name}
                 onChange={(e) => handleChange(e)}
                 placeholder="Diet" /> 
           
-            <input type="button" name="AddDiet" value="AddDiet" onClick={Adder}/>
-
-            <select name="AddExDiet" onChange={Adder}>
+            <input className='buttonNormal' type="button" name="AddDiet" value="AddDiet" onClick={Adder}/>
+                  
+            <select className='inputNormal' name="AddExDiet" onChange={Adder}>
                     <option>--- Select from our Diets</option>
                     {allDiets.map((d,i) => {return (<option key={i+'globalDietKey'} id={`${i}exDiet`} value={d}>{d}</option>)})}
                 </select>           
             
-
+            </div>       
+            <div>
             {input.diets.map((el,i) => (
-                  <div key={i+'inputDietKey'}>
+                  <div key={i+'inputDietKey'} >
                     <label htmlFor={i}>Diet {i + 1}</label>
-                    <input 
+                    <input className='inputNormal'
                           name="diets"
                           id={`${i}diet`}
                           type='text'
                           value={el}
                           onChange={(e) => handleDietChange(e)} />
-                    <button name='diet' id={i+'DT'} onClick={(e) => Deleter(e)}> x </button>
+                    <button className='buttonNormal' name='diet' id={i+'DT'} onClick={(e) => Deleter(e)}> x </button>
                   </div>
                 ))}
-
-              <input
+            </div>
+            
+            <div className='input-label'>
+            <label htmlFor='image'>Image</label>  
+            <input
                 name="image"
                 type="text"
                 value={input.name}
                 onChange={(e) => validateImage(e)}
                 placeholder="Insert url" />
-              
-              <div>
+            </div> 
+            <div  >
                 <h5>Image Preview</h5>
-                <img className='img-mediana' src={input.image ? input.image : 'https://i.pinimg.com/originals/dd/08/4f/dd084ff0b0739c6bf1268d5e815ee7a1.png '} alt='preview'/>
-                </div>
+                <img className='imagePreview' src={input.image ? input.image : 'https://i.pinimg.com/originals/dd/08/4f/dd084ff0b0739c6bf1268d5e815ee7a1.png '} alt='preview'/>
+            </div>
+            
+              
 
             {!error ? null : <div>{error}</div>}
-            <input id="btnSubmit" type="submit" value="Add Recipe" />
+            <input className='buttonSubmit' id="btnSubmit" type="submit" value="Add Recipe" />
         </form>
         </div>
 
