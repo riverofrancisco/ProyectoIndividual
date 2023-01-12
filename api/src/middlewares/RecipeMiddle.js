@@ -77,7 +77,7 @@ if(THErecipe.length > 0){
                 }
             },
         }).then((data) => {return {
-                ...data.dataValues,//porqué funciona con datavalues? buscar el funcionamiento de esta propiedad.
+                ...data.dataValues,
                 diets: data.dataValues.diets.map(diet => diet.name)
             };
         });

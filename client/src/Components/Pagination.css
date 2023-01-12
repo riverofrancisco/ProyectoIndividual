@@ -26,4 +26,6 @@
 .pageNumber-active {
     color: brown;
     background-color: white;
+    cursor: pointer;
+    padding: 10px;
 }

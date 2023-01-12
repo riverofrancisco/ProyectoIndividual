@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filterByDiet, getDiets, getRecipes, alphabeticOrder, healthScoreOrder } from '../actions/actions';
 
 
-export default function Navbar({setOrder}){
+export default function Navbar({setOrder, paginate}){
 
     const dispatch = useDispatch();
     const allDiets = useSelector((state) => state.diets);
@@ -51,9 +51,9 @@ export default function Navbar({setOrder}){
             
                 
             </Link>
-            <div className='buttonLink'>
-                <label>Order by:</label>
-                <select className='selectMenu' onChange={(e)=> handleOrder(e)}>
+            <div>
+                
+                <select  className='buttonLink' onChange={(e)=> handleOrder(e)}>
                     <option >Order By</option>
                     <option value='az'>Title A-Z</option>
                     <option value='za'>Title Z-A</option>
@@ -62,21 +62,19 @@ export default function Navbar({setOrder}){
                 </select>
             </div>
             
-            <div className='buttonLink'>
-                <label>Filter by diet-type:</label>
-                <select className='selectMenu' onChange={(e)=> handleFilter(e)}>
-                    <option>--- Choose a Diet</option>
+            <div >
+                <select className='buttonLink' onChange={(e)=> handleFilter(e)}>
+                    <option>Filter by Diet</option>
                     <option value='ALL'>Clear Filter</option>
                     {allDiets.map(d => {return (<option key={d} value={d} >{d}</option>)})}
                 </select>
             </div>
-
-            <div className='buttonLink'>
-                <Link to ='/home/creationform'>
+            
+            <Link to ='/home/creationform'>
+            <div className='buttonLink'>   
                 Add your own recipe
-                </Link>                
             </div>
-
+            </Link> 
 {/*             <div>
             <Link to ='/home/diets'>
              Our Diets
@@ -84,14 +82,16 @@ export default function Navbar({setOrder}){
             </div> */}
             
             <div className='buttonLink'>
-            <SearchBar 
+            <SearchBar
             />
             </div>
 
             
         </nav>
         
-        {filterDiets.map(d => {return (<div key={d}> {d}</div>)})}
+        <div className='dietSelected'>
+        {filterDiets.map(d => {return (<div className='diet' key={d}> {d}</div>)})}
+        </div>
         
         </div>
     );

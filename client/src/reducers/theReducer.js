@@ -1,7 +1,8 @@
 const initialState = {
     recipes: [],
     diets: [],
-    recipe: {}
+    recipe: {},
+    currentPage: 1
 };
 
 
@@ -43,6 +44,11 @@ const theReducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: state.recipes.filter((recipe) => recipe.diets.join(' ').includes(action.payload))
+                };
+        case 'PAGINATE':
+            return {
+                ...state,
+                currentPage: action.payload
             }
         case 'GET_RECIPE_DETAIL':
             return {

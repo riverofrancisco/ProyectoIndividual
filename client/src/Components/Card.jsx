@@ -17,8 +17,9 @@ export default function Card({id, title, summary, healthScore, image, diets}){
                 </div> 
             </Link>
             <div className='card-body'>
-                <h5>HealthScore: {healthScore}</h5>
-                <p>Diets: {diets}</p>
+                <h4 className='card-HS'>HealthScore - {healthScore}</h4>
+                <h4 className='card-Diets'>Diets</h4>
+                <p className='card-diets'>{diets}</p>
             </div>       
        </div>
     );

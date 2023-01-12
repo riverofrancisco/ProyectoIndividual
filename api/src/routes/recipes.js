@@ -67,7 +67,7 @@ router.get('/', async (req, res) => {
             if (filteRecipes.length > 0) {
                 res.status(200).json(filteRecipes);
             } else {
-                res.status(404).json([{Error: `No se encontraron recetas que contengan "${name}"`}]);
+                res.status(201).json([`No se encontraron recetas que contengan "${name}"`]);
             }}         
     } catch(e) {
         res.status(400).json({

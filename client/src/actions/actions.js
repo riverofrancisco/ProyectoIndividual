@@ -42,3 +42,7 @@ export const healthScoreOrder = (data) => {
 export const filterByDiet = (data) => {
   return {type: 'FILTER_BY_DIET', payload: data}
 }
+
+export const setCurrentPage = (data) => {
+  return {type: 'PAGINATE', payload: data}
+}

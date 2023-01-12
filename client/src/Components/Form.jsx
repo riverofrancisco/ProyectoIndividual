@@ -52,10 +52,12 @@ function validateHS(e) {//Numero entre 1 y 100
     if(!value) {
       setError('Falta enviar datos obligatorios')
     } else if (name === 'title'){
-        if('condition' === 0){
+        if(/[^A-Za-z0-9]+/.test(value)){
           console.log(`${value} no cumple con el TitLe`)
           setError('El titulo debe contener sólo letras y/o números');
-        } else {setInput({
+        } else {
+          setError('')
+          setInput({
                           ...input,
                           [name] : value})};
       } else {
@@ -318,7 +320,7 @@ const onSubmit = (event) => {
             
             <div className='input-label'>
             <label htmlFor='image'>Image</label>  
-            <input
+            <input className={error.includes('URL') && 'danger'}
                 name="image"
                 type="text"
                 value={input.name}

@@ -1,7 +1,7 @@
 import {React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getRecipes, getDiets } from "../actions/actions";
+import { getRecipes, getDiets, setCurrentPage } from "../actions/actions";
 import Card from "./Card";
 import './Cards.css';
 import Navbar from "./NavBar";
@@ -14,6 +14,7 @@ export default function Cards(){
   const [, setOrder] = useState('');
 
   const allRecipes = useSelector((state) => state.recipes);
+  const allDiets = useSelector((state) => state.diets);
   const dispatch = useDispatch();  
   
   useEffect(() => {
@@ -22,31 +23,61 @@ export default function Cards(){
       dispatch(getDiets());
   }, [dispatch]);
   
+  useEffect(()=> {
+      dispatch(setCurrentPage(1))
+      console.log(allRecipes)
+  }, [allRecipes])
 
   ///// PAGINATION /////////
-  const [currentPage, setcurrentPage] = useState(1);
+  /* const [currentPage, setcurrentPage] = useState(1); */ // reemplazar esto por estado global.
   const [recipesPerPage] = useState(9);
+  const currentPage = useSelector((state)=> state.currentPage)
+
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
   const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
-  const paginate = (pageNumber) => setcurrentPage(pageNumber);
+  const paginate = (pageNumber) => dispatch(setCurrentPage(pageNumber));//con estado global debería reemplazarse por dispatch.
 
-  if(!allRecipes[0]){
+  if(allDiets.length === 0){
     return(
       <Loading />
   )
   }
   
+  if(typeof allRecipes[0] === 'string'){
+      return(
+            <div>
+
+                  <div className="navBar">
+                        <Navbar 
+                        setOrder={setOrder} />
+                  </div>  
+            
+            <div className="contentError">
+                  <div>
+                        <h3>
+                        {allRecipes}
+                        </h3>
+                        
+                  </div>
+
+                  <button className="buttonReset" onClick={() => dispatch(getRecipes())}>Reset Search</button>
+            </div>    
+            </div>
+      )
+  }
+
+
   return (    
         <div>
           
         <div className="navBar">
-        <Navbar setOrder={setOrder}/>
+        <Navbar 
+              setOrder={setOrder} />
         </div>  
         
-          
 
         <div className = 'cards'>
         {currentRecipes.map((r) => {return (<Card
@@ -59,8 +90,6 @@ export default function Cards(){
               diets={r.diets.join(', ')}
           />) })} 
         </div>
-          
-        
         
         <div>
         <Pagination 
