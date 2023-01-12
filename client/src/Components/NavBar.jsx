@@ -40,17 +40,13 @@ export default function Navbar({setOrder, paginate}){
     return (
        <div>
        <nav className='headerNavbar'>
+
             <Link style={{textDecoration: 'none'}} to ='/home'>
- {/*            <div>
-            <img className='logo' src='https://ih1.redbubble.net/image.545261467.0310/st,small,507x507-pad,600x600,f8f8f8.u1.jpg' alt='logo' />
-            </div> */}
-           
             <div className='buttonLink' onClick={() => window.location.reload()}>
                 <label>Home Page</label>    
             </div>
-            
-                
             </Link>
+
             <div>
                 
                 <select  className='buttonLink' onChange={(e)=> handleOrder(e)}>
@@ -75,18 +71,11 @@ export default function Navbar({setOrder, paginate}){
                 Add your own recipe
             </div>
             </Link> 
-{/*             <div>
-            <Link to ='/home/diets'>
-             Our Diets
-            </Link>
-            </div> */}
             
             <div className='buttonLink'>
             <SearchBar
             />
-            </div>
-
-            
+            </div>  
         </nav>
         
         <div className='dietSelected'>

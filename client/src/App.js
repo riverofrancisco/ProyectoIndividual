@@ -22,12 +22,6 @@ function App() {
           component={Welcomepage} 
           />
 
-{/* 
-          <Route 
-          path = '/home' 
-          component= {Navbar}
-          /> */}
-
           <Route 
           exact path = '/home' 
           component={Cards}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { findRecipeByTitle, setCurrentPage } from "../actions/actions";
+import { findRecipeByTitle } from "../actions/actions";
 
 import './SearchBar.css'
 
@@ -11,14 +11,9 @@ export default function SearchBar () {
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.recipes)
 
-
-
-
-
  return (
     <form className="searchBar"  onSubmit={(e) => {
         e.preventDefault();
-/*         dispatch(setCurrentPage(1)); */
         dispatch(findRecipeByTitle(title));
         console.log(recipes)        
       }}>

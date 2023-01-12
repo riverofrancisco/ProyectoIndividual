@@ -4,11 +4,6 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('recipe', {
-/*     id: {
-      type: DataTypes.INTEGER,
-      autoincrement: true,
-      primaryKey: true
-    }, */
     title: {
       type: DataTypes.STRING,
       allowNull: false

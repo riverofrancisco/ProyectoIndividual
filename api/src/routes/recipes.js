@@ -16,9 +16,9 @@ router.post('/', async (req, res) => {
       if (!title || !summary) return res.status(404).send('Falta enviar datos obligatorios');
       const newRecipe = await Recipe.create({title, summary, healthScore, stepBYstep, image});
       
-      if (diets) {//findOrCreate en DB la/s dietas correspondientes
+      if (diets) {
         for(let i = 0; i < diets.length; i++){
-            const [newDiet, created]= await Diet.findOrCreate({
+            const [newDiet, created] = await Diet.findOrCreate({
                 where: {
                     name: diets[i]
                 }});
@@ -32,8 +32,9 @@ router.post('/', async (req, res) => {
         }});
     
     console.log(recipeCreated.dataValues);
+    console.log('La receta "' + recipeCreated.dataValues.title + '" se ha creado correctamente.');
     
-    res.status(200).send('La dieta "' + recipeCreated.dataValues.title + '" se ha creado correctamente.');
+    res.status(200).send('La receta "' + recipeCreated.dataValues.title + '" se ha creado correctamente.');
     } catch(e) {
       res.status(400).json({
         Tipo: 'Ha ocurrido un error',
@@ -118,6 +119,7 @@ router.get('/:idReceta', async (req, res) => {
 
     try {
         const foundRecipe = await OneRecipebyId(idReceta);
+        console.log(foundRecipe.title);
         if(!foundRecipe) return res.status(404).send(`No existe la receta con ID: ${idReceta}`);
         res.status(200).json(foundRecipe);
     } catch (err) {

@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
-import { getDiets } from '../actions/actions';
+import { getDiets, getRecipes } from '../actions/actions';
 import './Form.css'
 
 
@@ -31,6 +31,8 @@ const [newDiet, setNewDiet] = useState({name: ''})
 const [error, setError] = useState(' ');
 
 //// VALIDATIONS ///////
+
+//HEALTHSCORE //
 function validateHS(e) {//Numero entre 1 y 100
     const {value, name} = e.target;
     
@@ -46,7 +48,8 @@ function validateHS(e) {//Numero entre 1 y 100
     }
   };
 
-  function validateTyS(e) {//No puede tener simbolos.
+// TITLE AND SUMMARY //
+function validateTyS(e) {//No puede tener simbolos.
     const {value, name} = e.target;
 
     if(!value) {
@@ -69,11 +72,11 @@ function validateHS(e) {//Numero entre 1 y 100
     }
   };
 
-  function validateImage(event) {//debe ser una url.
+// IMAGE //
+function validateImage(event) {//debe ser una url.
     const {value, name} = event.target;
     
-    
-    if(/https:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(value)) {//chequear si no hay error, limpiar el error.
+    if(/https:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(value)) {
     setError('')
     setInput({
       ...input,
@@ -209,6 +212,8 @@ const onSubmit = (event) => {
     }
   })
 
+  dispatch(getRecipes());
+  dispatch(getDiets());
   alert(`Recipe "${input.title}" created succesfully.`)
   history.push("/home");
 
@@ -329,10 +334,8 @@ const onSubmit = (event) => {
             </div> 
             <div  >
                 <h5>Image Preview</h5>
-                <img className='imagePreview' src={input.image ? input.image : 'https://i.pinimg.com/originals/dd/08/4f/dd084ff0b0739c6bf1268d5e815ee7a1.png '} alt='preview'/>
+                <img className='imagePreview' src={input.image ? input.image : 'https://i.pinimg.com/originals/dd/08/4f/dd084ff0b0739c6bf1268d5e815ee7a1.png'} alt='preview'/>
             </div>
-            
-              
 
             {!error ? null : <div>{error}</div>}
             <input className='buttonSubmit' id="btnSubmit" type="submit" value="Add Recipe" />

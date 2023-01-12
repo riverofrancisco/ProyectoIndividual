@@ -39,7 +39,6 @@ async function DBrecipes(){
     })
     );
 
-    //continuar revisando lo que recibo.
     return shortDBRecipes;
 };
 
@@ -61,7 +60,7 @@ if(THErecipe.length > 0){
                         title: data.title,
                         summary: data.summary,
                         healthScore: data.healthScore,
-                        stepBYstep: data.analyzedInstructions[0].steps.map(e => /* e.number  + ': ' + */ e.step),
+                        stepBYstep: data.analyzedInstructions[0].steps.map(e => e.step),
                         diets: data.diets,
                         image: data.image
                     };

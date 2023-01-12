@@ -1,10 +1,6 @@
 import {React, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import './Welcome.css'
-
-import { useDispatch, useSelector } from "react-redux";
-
-import { getRecipes, getDiets } from "../actions/actions";
+import './Welcome.css';
 
 export default function Welcomepage(){
     

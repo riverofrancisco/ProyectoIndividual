@@ -10,12 +10,14 @@ import Loading from "./LoadingPage";
 
 
 export default function Cards(){
-  
-  const [, setOrder] = useState('');
 
+  //// STATES ///////////    
+  
+  
   const allRecipes = useSelector((state) => state.recipes);
   const allDiets = useSelector((state) => state.diets);
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch(); 
+  const [, setOrder] = useState(''); 
   
   useEffect(() => {
       console.log('Renderizando Recipes')
@@ -42,12 +44,14 @@ export default function Cards(){
 
   const paginate = (pageNumber) => dispatch(setCurrentPage(pageNumber));//con estado global debería reemplazarse por dispatch.
 
+  //// LOADING ///////////
   if(allDiets.length === 0){
     return(
       <Loading />
   )
   }
   
+  //// ERROR WITH SEARCH ///////////
   if(typeof allRecipes[0] === 'string'){
       return(
             <div>
@@ -71,7 +75,7 @@ export default function Cards(){
       )
   }
 
-
+  //// RENDER OF RECIPE CARDS ///////////
   return (    
         <div>
           
@@ -81,7 +85,7 @@ export default function Cards(){
         </div>  
         
 
-        <div className = 'cards'>
+        <div className = "cards">
         {currentRecipes.map((r) => {return (<Card
               key={r.id}
               id={r.id}

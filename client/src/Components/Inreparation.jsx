@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+//// NOT IN USE /////////////
 export default function Reparation (){
     return(
         <div>

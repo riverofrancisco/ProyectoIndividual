@@ -16,13 +16,12 @@ const { id } = useParams();
 
 console.log(`Renderizando detail of recipe id: ${id} y ${title}`)
 
-
-
 useEffect(() => {
     console.log(title);
     dispatch(getRecipeDetail(id))
-   }, [id]);  
-    
+   }, [id]); 
+
+//// LOADING ////    
 if(!title){
     return(
         <Loading />

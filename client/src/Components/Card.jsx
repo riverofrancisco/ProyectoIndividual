@@ -3,7 +3,7 @@ import './Card.css';
 import { Link } from 'react-router-dom';
 
 
-export default function Card({id, title, summary, healthScore, image, diets}){
+export default function Card({id, title, healthScore, image, diets}){
 
     const PATH = `/home/recipedetail/${id}`
     return (
