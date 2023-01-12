@@ -19,9 +19,11 @@ export default function Cards(){
   
   useEffect(() => {
       console.log('Renderizando Recipes')
-      dispatch(getRecipes());
-      dispatch(getDiets());
-  }, [dispatch]);
+      if(allRecipes.length === 0){
+            dispatch(getRecipes());
+            dispatch(getDiets());
+      }
+  }, []);
   
   useEffect(()=> {
       dispatch(setCurrentPage(1))

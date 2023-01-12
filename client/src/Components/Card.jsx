@@ -8,7 +8,7 @@ export default function Card({id, title, summary, healthScore, image, diets}){
     const PATH = `/home/recipedetail/${id}`
     return (
         <div className='card'>
-            <Link to = {PATH}>
+            <Link style={{textDecoration: 'none'}} to = {PATH}>
                 <div>
                 <img className='img-grande' src= {image} alt="PhotoHere" />
                 </div>

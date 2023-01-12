@@ -37,8 +37,8 @@ const {
         attributes: ['name']
       });
       
-      console.log('Chequeando DB ↓')
-      console.log(DBdietsOBJ)
+/*       console.log('Chequeando DB ↓')
+      console.log(DBdietsOBJ) */
       const DBdietsARRAY = DBdietsOBJ.map((obj) => obj.name);
       return DBdietsARRAY
 

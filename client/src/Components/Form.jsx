@@ -52,7 +52,7 @@ function validateHS(e) {//Numero entre 1 y 100
     if(!value) {
       setError('Falta enviar datos obligatorios')
     } else if (name === 'title'){
-        if(/[^A-Za-z0-9]+/.test(value)){
+        if(/[^A-Za-z0-9\s]+$/.test(value)){
           console.log(`${value} no cumple con el TitLe`)
           setError('El titulo debe contener sólo letras y/o números');
         } else {

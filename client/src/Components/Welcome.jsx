@@ -17,7 +17,7 @@ export default function Welcomepage(){
 
             <Link to='/home'>
             <button className="button">
-             Go to HomePage
+             Home
             </button>
             </Link>
             

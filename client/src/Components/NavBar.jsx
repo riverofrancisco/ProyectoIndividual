@@ -40,7 +40,7 @@ export default function Navbar({setOrder, paginate}){
     return (
        <div>
        <nav className='headerNavbar'>
-            <Link to ='/home'>
+            <Link style={{textDecoration: 'none'}} to ='/home'>
  {/*            <div>
             <img className='logo' src='https://ih1.redbubble.net/image.545261467.0310/st,small,507x507-pad,600x600,f8f8f8.u1.jpg' alt='logo' />
             </div> */}
@@ -70,7 +70,7 @@ export default function Navbar({setOrder, paginate}){
                 </select>
             </div>
             
-            <Link to ='/home/creationform'>
+            <Link style={{textDecoration: 'none'}} to ='/home/creationform'>
             <div className='buttonLink'>   
                 Add your own recipe
             </div>
